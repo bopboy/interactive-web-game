@@ -20,11 +20,15 @@ class Hero {
             this.element.classList.remove('run')
         }
         if (key.keyDown['attack']) {
-            this.element.classList.add('attack')
-            new Bullet()
+            if (!bulletComProp.launch) {
+                this.element.classList.add('attack')
+                bulletComProp.arr.push(new Bullet())
+                bulletComProp.launch = true
+            }
         }
         if (!key.keyDown['attack']) {
             this.element.classList.remove('attack')
+            bulletComProp.launch = false
         }
         this.element.parentNode.style.transform = `translateX(${this.movex}px)`
     }
@@ -51,12 +55,19 @@ class Bullet {
         this.element.className = 'hero_bullet'
         this.x = 0
         this.y = 0
+        this.speed = 30
+        this.distance = 0
         this.init()
     }
     init() {
         this.x = hero.position().left + hero.size().width / 2
         this.y = hero.position().bottom - hero.size().height / 2
+        this.distance = this.x
         this.element.style.transform = `translate(${this.x}px, ${this.y}px)`
         this.parentNode.append(this.element)
+    }
+    moveBullet() {
+        this.distance += this.speed
+        this.element.style.transform = `translate(${this.distance}px, ${this.y}px)`
     }
 }

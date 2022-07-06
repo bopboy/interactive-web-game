@@ -3,17 +3,18 @@ class Hero {
         this.element = document.querySelector(elem)
         this.movex = 0
         this.speed = 16
+        this.direction = 'right'
     }
     keyMotion() {
         if (key.keyDown['left']) {
+            this.direction = 'left'
             this.element.classList.add('run')
             this.element.classList.add('flip')
-            console.log(this.position().right)
             this.movex = this.movex - this.speed
         } else if (key.keyDown['right']) {
+            this.direction = 'right'
             this.element.classList.add('run')
             this.element.classList.remove('flip')
-            console.log(this.position().right)
             this.movex = this.movex + this.speed
         }
         if (!key.keyDown['left'] && !key.keyDown['right']) {
@@ -57,9 +58,11 @@ class Bullet {
         this.y = 0
         this.speed = 30
         this.distance = 0
+        this.bulletDirection = 'right'
         this.init()
     }
     init() {
+        this.bulletDirection = hero.direction
         this.x = hero.position().left + hero.size().width / 2
         this.y = hero.position().bottom - hero.size().height / 2
         this.distance = this.x
@@ -67,8 +70,14 @@ class Bullet {
         this.parentNode.append(this.element)
     }
     moveBullet() {
-        this.distance += this.speed
-        this.element.style.transform = `translate(${this.distance}px, ${this.y}px)`
+        let setRotate = ''
+        if (this.bulletDirection === 'left') {
+            this.distance -= this.speed
+            setRotate = 'rotate(180deg)'
+        } else {
+            this.distance += this.speed
+        }
+        this.element.style.transform = `translate(${this.distance}px, ${this.y}px) ${setRotate}`
         this.crashBullet()
     }
     position() {

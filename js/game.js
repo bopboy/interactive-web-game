@@ -49,7 +49,6 @@ const init = () => {
     loadImg()
     windowEvent()
     renderGame()
-    console.log(hero.position())
 }
 
 window.onload = () => {

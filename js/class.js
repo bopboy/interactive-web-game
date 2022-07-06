@@ -10,7 +10,7 @@ class Hero {
             this.direction = 'left'
             this.element.classList.add('run')
             this.element.classList.add('flip')
-            this.movex = this.movex - this.speed
+            this.movex = this.movex <= 0 ? 0 : this.movex - this.speed
         } else if (key.keyDown['right']) {
             this.direction = 'right'
             this.element.classList.add('run')
@@ -63,7 +63,7 @@ class Bullet {
     }
     init() {
         this.bulletDirection = hero.direction
-        this.x = hero.movex + hero.size().width / 2
+        this.x = this.bulletDirection === 'right' ? hero.movex + hero.size().width / 2 : hero.movex - hero.size().width / 2
         this.y = hero.position().bottom - hero.size().height / 2
         this.distance = this.x
         this.element.style.transform = `translate(${this.x}px, ${this.y}px)`

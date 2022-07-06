@@ -29,6 +29,10 @@ const windowEvent = () => {
     window.addEventListener('keyup', e => {
         key.keyDown[key.keyValue[e.which]] = false
     })
+    window.addEventListener('resize', e => {
+        gameProp.screenWidth = window.innerWidth
+        gameProp.screenHeight = window.innerHeight
+    })
 }
 let hero
 const init = () => {

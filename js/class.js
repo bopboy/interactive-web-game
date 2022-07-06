@@ -94,3 +94,18 @@ class Bullet {
         }
     }
 }
+
+class Monster {
+    constructor() {
+        this.parentNode = document.querySelector('.game')
+        this.element = document.createElement('div')
+        this.element.className = 'monster_box'
+        this.elChildren = document.createElement('div')
+        this.elChildren.className = 'monster'
+        this.init()
+    }
+    init() {
+        this.element.append(this.elChildren)
+        this.parentNode.append(this.element)
+    }
+}

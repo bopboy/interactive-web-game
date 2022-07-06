@@ -44,8 +44,10 @@ const setGameBackground = () => {
 }
 
 let hero
+let monster
 const init = () => {
     hero = new Hero('.hero')
+    monster = new Monster()
     loadImg()
     windowEvent()
     renderGame()

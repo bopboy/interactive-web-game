@@ -44,9 +44,12 @@
 }
 
 .hero_box {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 100;
     width: 377px;
     height: 458px;
-    background-color: red;
 }
 
 .hero_box .hero {

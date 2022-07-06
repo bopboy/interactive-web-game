@@ -6,14 +6,18 @@ const key = {
         88: 'attack'
     }
 }
+
+const renderGame = () => {
+    hero.keyMotion()
+    window.requestAnimationFrame(renderGame)
+}
+
 const windowEvent = () => {
     window.addEventListener('keydown', e => {
         key.keyDown[key.keyValue[e.which]] = true
-        hero.keyMotion()
     })
     window.addEventListener('keyup', e => {
         key.keyDown[key.keyValue[e.which]] = false
-        hero.keyMotion()
     })
 }
 let hero
@@ -21,6 +25,7 @@ const init = () => {
     hero = new Hero('.hero')
     loadImg()
     windowEvent()
+    renderGame()
 }
 
 window.onload = () => {

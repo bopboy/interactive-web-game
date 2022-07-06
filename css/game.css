@@ -56,6 +56,10 @@
     animation: hero_idle 0.3s infinite steps(10);
 }
 
+.hero_box .hero.flip {
+    transform: rotateY(180deg);
+}
+
 .hero_box .hero.run {
     height: 100%;
     background-image: url('../lib/images/ninja_run.png');

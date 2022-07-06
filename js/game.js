@@ -3,21 +3,22 @@ const key = {
     keyValue: {
         37: 'left',
         39: 'right',
-        38: 'up'
+        88: 'attack'
     }
 }
 const windowEvent = () => {
     window.addEventListener('keydown', e => {
         key.keyDown[key.keyValue[e.which]] = true
-        console.log(key.keyDown)
+        hero.keyMotion()
     })
     window.addEventListener('keyup', e => {
         key.keyDown[key.keyValue[e.which]] = false
-        console.log(key.keyDown)
+        hero.keyMotion()
     })
 }
-
+let hero
 const init = () => {
+    hero = new Hero('.hero')
     windowEvent()
 }
 

@@ -2,7 +2,7 @@ class Hero {
     constructor(elem) {
         this.element = document.querySelector(elem)
         this.movex = 0
-        this.speed = 16
+        this.speed = 11
         this.direction = 'right'
     }
     keyMotion() {

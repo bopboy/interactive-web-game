@@ -69,5 +69,19 @@ class Bullet {
     moveBullet() {
         this.distance += this.speed
         this.element.style.transform = `translate(${this.distance}px, ${this.y}px)`
+        this.crashBullet()
+    }
+    position() {
+        return {
+            left: this.element.getBoundingClientRect().left,
+            right: this.element.getBoundingClientRect().right,
+            top: gameProp.screenHeight - this.element.getBoundingClientRect().top,
+            bottom: gameProp.screenHeight - this.element.getBoundingClientRect().top - this.element.getBoundingClientRect().height
+        }
+    }
+    crashBullet() {
+        if (this.position().left > gameProp.screenWidth || this.position().right < 0) {
+            this.element.remove()
+        }
     }
 }

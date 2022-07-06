@@ -21,6 +21,7 @@ class Hero {
         }
         if (key.keyDown['attack']) {
             this.element.classList.add('attack')
+            new Bullet()
         }
         if (!key.keyDown['attack']) {
             this.element.classList.remove('attack')
@@ -34,5 +35,28 @@ class Hero {
             top: gameProp.screenHeight - this.element.getBoundingClientRect().top,
             bottom: gameProp.screenHeight - this.element.getBoundingClientRect().top - this.element.getBoundingClientRect().height
         }
+    }
+    size() {
+        return {
+            width: this.element.offsetWidth,
+            height: this.element.offsetHeight
+        }
+    }
+}
+
+class Bullet {
+    constructor() {
+        this.parentNode = document.querySelector('.game')
+        this.element = document.createElement('div')
+        this.element.className = 'hero_bullet'
+        this.x = 0
+        this.y = 0
+        this.init()
+    }
+    init() {
+        this.x = hero.position().left + hero.size().width / 2
+        this.y = hero.position().bottom - hero.size().height / 2
+        this.element.style.transform = `translate(${this.x}px, ${this.y}px)`
+        this.parentNode.append(this.element)
     }
 }

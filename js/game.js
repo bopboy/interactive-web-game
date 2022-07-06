@@ -14,8 +14,12 @@ const bulletComProp = {
     launch: false,
     arr: []
 }
+const gameBackground = {
+    gameBox: document.querySelector('.game')
+}
 const renderGame = () => {
     hero.keyMotion()
+    setGameBackground()
     bulletComProp.arr.forEach((arr, i) => {
         arr.moveBullet()
     })
@@ -34,6 +38,11 @@ const windowEvent = () => {
         gameProp.screenHeight = window.innerHeight
     })
 }
+const setGameBackground = () => {
+    let parallelaxValue = Math.min(0, (hero.movex - gameProp.screenWidth / 3) * -1)
+    gameBackground.gameBox.style.transform = `translatex(${parallelaxValue}px)`
+}
+
 let hero
 const init = () => {
     hero = new Hero('.hero')

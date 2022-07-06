@@ -6,7 +6,10 @@ const key = {
         88: 'attack'
     }
 }
-
+const gameProp = {
+    screenWidth: window.innerWidth,
+    screenHeight: window.innerHeight
+}
 const renderGame = () => {
     hero.keyMotion()
     window.requestAnimationFrame(renderGame)
@@ -26,6 +29,7 @@ const init = () => {
     loadImg()
     windowEvent()
     renderGame()
+    console.log(hero.position())
 }
 
 window.onload = () => {

@@ -21,7 +21,6 @@ const renderGame = () => {
     hero.keyMotion()
     setGameBackground()
     bulletComProp.arr.forEach((arr, i) => {
-        console.log(bulletComProp.arr.length)
         arr.moveBullet()
     })
     window.requestAnimationFrame(renderGame)

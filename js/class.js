@@ -4,6 +4,7 @@ class Hero {
         this.movex = 0
         this.speed = 11
         this.direction = 'right'
+        this.attackDamage = 1000
     }
     keyMotion() {
         if (key.keyDown['left']) {
@@ -94,7 +95,7 @@ class Bullet {
                 if (bulletComProp.arr[i] === this) {
                     bulletComProp.arr.splice(i, 1)
                     this.element.remove()
-                    console.log(bulletComProp.arr)
+                    monster.updateHp()
                 }
             }
         }
@@ -103,7 +104,6 @@ class Bullet {
                 if (bulletComProp.arr[i] === this) {
                     bulletComProp.arr.splice(i, 1)
                     this.element.remove()
-                    console.log(bulletComProp.arr)
                 }
             }
         }
@@ -138,5 +138,9 @@ class Monster {
             top: gameProp.screenHeight - this.element.getBoundingClientRect().top,
             bottom: gameProp.screenHeight - this.element.getBoundingClientRect().top - this.element.getBoundingClientRect().height
         }
+    }
+    updateHp() {
+        this.hpValue = Math.max(0, this.hpValue - hero.attackDamage)
+        this.element.children[0].innerText = this.hpValue
     }
 }

@@ -111,17 +111,25 @@ class Bullet {
 }
 
 class Monster {
-    constructor() {
+    constructor(positionX, hp) {
         this.parentNode = document.querySelector('.game')
         this.element = document.createElement('div')
         this.element.className = 'monster_box'
         this.elChildren = document.createElement('div')
         this.elChildren.className = 'monster'
+        this.hpNode = document.createElement('div')
+        this.hpNode.className = 'hp'
+        this.hpValue = hp
+        this.hpTextNode = document.createTextNode(this.hpValue)
+        this.positionX = positionX
         this.init()
     }
     init() {
+        this.hpNode.append(this.hpTextNode)
+        this.element.append(this.hpNode)
         this.element.append(this.elChildren)
         this.parentNode.append(this.element)
+        this.element.style.left = this.positionX + 'px'
     }
     position() {
         return {

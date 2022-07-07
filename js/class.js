@@ -122,12 +122,14 @@ class Monster {
         this.hpNode = document.createElement('div')
         this.hpNode.className = 'hp'
         this.hpValue = hp
-        this.hpTextNode = document.createTextNode(this.hpValue)
+        this.defaultHpValue = hp
+        this.hpInner = document.createElement('span')
+        this.progress = 0
         this.positionX = positionX
         this.init()
     }
     init() {
-        this.hpNode.append(this.hpTextNode)
+        this.hpNode.append(this.hpInner)
         this.element.append(this.hpNode)
         this.element.append(this.elChildren)
         this.parentNode.append(this.element)
@@ -145,11 +147,11 @@ class Monster {
         this.element.classList.add('remove')
         setTimeout(() => this.element.remove(), 200)
         allMonterComProp.arr.splice(index, 1)
-        console.log(allMonterComProp.arr)
     }
     updateHp(index) {
         this.hpValue = Math.max(0, this.hpValue - hero.attackDamage)
-        this.element.children[0].innerText = this.hpValue
+        this.progress = this.hpValue / this.defaultHpValue * 100
+        this.element.children[0].children[0].style.width = this.progress + '%'
 
         if (this.hpValue === 0) {
             this.dead(index)

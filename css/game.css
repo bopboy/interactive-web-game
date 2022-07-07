@@ -119,6 +119,11 @@
     will-change: transform;
 }
 
+.monster_box.remove {
+    opacity: 0;
+    transition: opacity .2s;
+}
+
 @keyframes monster_run {
     from {
         background-position-x: 0px;

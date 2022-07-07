@@ -96,7 +96,7 @@ class Bullet {
                     if (bulletComProp.arr[i] === this) {
                         bulletComProp.arr.splice(i, 1)
                         this.element.remove()
-                        allMonterComProp.arr[j].updateHp()
+                        allMonterComProp.arr[j].updateHp(j)
                     }
                 }
             }
@@ -141,8 +141,18 @@ class Monster {
             bottom: gameProp.screenHeight - this.element.getBoundingClientRect().top - this.element.getBoundingClientRect().height
         }
     }
-    updateHp() {
+    dead(index) {
+        this.element.classList.add('remove')
+        setTimeout(() => this.element.remove(), 200)
+        allMonterComProp.arr.splice(index, 1)
+        console.log(allMonterComProp.arr)
+    }
+    updateHp(index) {
         this.hpValue = Math.max(0, this.hpValue - hero.attackDamage)
         this.element.children[0].innerText = this.hpValue
+
+        if (this.hpValue === 0) {
+            this.dead(index)
+        }
     }
 }

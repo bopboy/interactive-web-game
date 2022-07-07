@@ -89,8 +89,23 @@ class Bullet {
         }
     }
     crashBullet() {
+        if (this.position().left > monster.position().left && this.position().right < monster.position().right) {
+            for (let i = 0; i < bulletComProp.arr.length; i++) {
+                if (bulletComProp.arr[i] === this) {
+                    bulletComProp.arr.splice(i, 1)
+                    this.element.remove()
+                    console.log(bulletComProp.arr)
+                }
+            }
+        }
         if (this.position().left > gameProp.screenWidth || this.position().right < 0) {
-            this.element.remove()
+            for (let i = 0; i < bulletComProp.arr.length; i++) {
+                if (bulletComProp.arr[i] === this) {
+                    bulletComProp.arr.splice(i, 1)
+                    this.element.remove()
+                    console.log(bulletComProp.arr)
+                }
+            }
         }
     }
 }
@@ -107,5 +122,13 @@ class Monster {
     init() {
         this.element.append(this.elChildren)
         this.parentNode.append(this.element)
+    }
+    position() {
+        return {
+            left: this.element.getBoundingClientRect().left,
+            right: this.element.getBoundingClientRect().right,
+            top: gameProp.screenHeight - this.element.getBoundingClientRect().top,
+            bottom: gameProp.screenHeight - this.element.getBoundingClientRect().top - this.element.getBoundingClientRect().height
+        }
     }
 }

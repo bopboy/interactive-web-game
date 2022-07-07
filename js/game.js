@@ -10,6 +10,9 @@ const gameProp = {
     screenWidth: window.innerWidth,
     screenHeight: window.innerHeight
 }
+const allMonterComProp = {
+    arr: []
+}
 const bulletComProp = {
     launch: false,
     arr: []
@@ -44,10 +47,10 @@ const setGameBackground = () => {
 }
 
 let hero
-let monster
 const init = () => {
     hero = new Hero('.hero')
-    monster = new Monster(500, 9000)
+    allMonterComProp.arr[0] = new Monster(700, 7777)
+    allMonterComProp.arr[1] = new Monster(1500, 5555)
     loadImg()
     windowEvent()
     renderGame()

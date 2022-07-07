@@ -90,12 +90,14 @@ class Bullet {
         }
     }
     crashBullet() {
-        if (this.position().left > monster.position().left && this.position().right < monster.position().right) {
-            for (let i = 0; i < bulletComProp.arr.length; i++) {
-                if (bulletComProp.arr[i] === this) {
-                    bulletComProp.arr.splice(i, 1)
-                    this.element.remove()
-                    monster.updateHp()
+        for (let j = 0; j < allMonterComProp.arr.length; j++) {
+            if (this.position().left > allMonterComProp.arr[j].position().left && this.position().right < allMonterComProp.arr[j].position().right) {
+                for (let i = 0; i < bulletComProp.arr.length; i++) {
+                    if (bulletComProp.arr[i] === this) {
+                        bulletComProp.arr.splice(i, 1)
+                        this.element.remove()
+                        allMonterComProp.arr[j].updateHp()
+                    }
                 }
             }
         }

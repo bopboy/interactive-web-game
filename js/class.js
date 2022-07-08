@@ -67,6 +67,7 @@ class Hero {
     }
     dead() {
         this.element.classList.add('dead')
+        endGame()
     }
 }
 

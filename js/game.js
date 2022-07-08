@@ -8,7 +8,8 @@ const key = {
 }
 const gameProp = {
     screenWidth: window.innerWidth,
-    screenHeight: window.innerHeight
+    screenHeight: window.innerHeight,
+    gameOver: false
 }
 const allMonterComProp = {
     arr: []
@@ -32,9 +33,15 @@ const renderGame = () => {
     window.requestAnimationFrame(renderGame)
 }
 
+const endGame = () => {
+    gameProp.gameOver = true
+    key.keyDown.left = false
+    key.keyDown.right = false
+    document.querySelector('.game_over').classList.add('active')
+}
 const windowEvent = () => {
     window.addEventListener('keydown', e => {
-        key.keyDown[key.keyValue[e.which]] = true
+        if (!gameProp.gameOver) key.keyDown[key.keyValue[e.which]] = true
     })
     window.addEventListener('keyup', e => {
         key.keyDown[key.keyValue[e.which]] = false

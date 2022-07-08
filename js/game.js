@@ -33,6 +33,7 @@ const renderGame = () => {
     allMonterComProp.arr.forEach((arr, i) => {
         arr.moveMonster()
     })
+    stageInfo.stage.clearCheck()
     window.requestAnimationFrame(renderGame)
 }
 

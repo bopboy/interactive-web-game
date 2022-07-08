@@ -63,20 +63,15 @@ let hero
 const init = () => {
     hero = new Hero('.hero')
     stageInfo.stage = new Stage()
-    // for (let i = 0; i <= 10; i++) {
-    //     if (i === 10) {
-    //         allMonterComProp.arr[i] = new Monster(greenMonBoss, gameProp.screenWidth + 600 * i)
-    //     } else {
-    //         allMonterComProp.arr[i] = new Monster(greenMon, gameProp.screenWidth + 700 * i)
-    //     }
-    // }
     loadImg()
     windowEvent()
     renderGame()
 }
-
+window.addEventListener('keydown', e => {
+    if (e.which === 13) init()
+})
 window.onload = () => {
-    init()
+    // init()
 }
 
 const loadImg = () => {

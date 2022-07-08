@@ -126,6 +126,8 @@ class Monster {
         this.hpInner = document.createElement('span')
         this.progress = 0
         this.positionX = positionX
+        this.movex = 0
+        this.speed = 10
         this.init()
     }
     init() {
@@ -156,5 +158,13 @@ class Monster {
         if (this.hpValue === 0) {
             this.dead(index)
         }
+    }
+    moveMonster() {
+        if (this.movex + this.positionX + this.element.offsetWidth + hero.position().left - hero.movex <= 0) {
+            this.movex = hero.movex - this.positionX + gameProp.screenWidth - hero.position().left
+        } else {
+            this.movex -= this.speed
+        }
+        this.element.style.transform = `translateX(${this.movex}px)`
     }
 }

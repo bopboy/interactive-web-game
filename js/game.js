@@ -26,6 +26,9 @@ const renderGame = () => {
     bulletComProp.arr.forEach((arr, i) => {
         arr.moveBullet()
     })
+    allMonterComProp.arr.forEach((arr, i) => {
+        arr.moveMonster()
+    })
     window.requestAnimationFrame(renderGame)
 }
 
@@ -50,7 +53,7 @@ let hero
 const init = () => {
     hero = new Hero('.hero')
     allMonterComProp.arr[0] = new Monster(700, 7777)
-    allMonterComProp.arr[1] = new Monster(1500, 5555)
+    // allMonterComProp.arr[1] = new Monster(1500, 5555)
     loadImg()
     windowEvent()
     renderGame()

@@ -335,3 +335,30 @@
     animation: textDamage .5s ease-out;
     animation-fill-mode: both;
 }
+
+@keyframes stageStart {
+    0% {
+        opacity: 1;
+    }
+
+    80% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+.stage_box {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 190;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-size: 90px;
+    white-space: nowrap;
+    animation: stageStart 1.5s;
+    animation-fill-mode: both;
+}

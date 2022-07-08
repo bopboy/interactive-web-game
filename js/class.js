@@ -217,3 +217,32 @@ class Monster {
         }
     }
 }
+
+class Stage {
+    constructor() {
+        this.stageStart()
+    }
+    stageStart() {
+        this.stageGuide()
+        this.callMonster()
+    }
+    stageGuide() {
+        this.parentNode = document.querySelector('.game_app')
+        this.textBox = document.createElement('div')
+        this.textBox.className = 'stage_box'
+        this.textNode = document.createTextNode('START LEVEL 1')
+        this.textBox.append(this.textNode)
+        this.parentNode.append(this.textBox)
+
+        setTimeout(() => this.textBox.remove(), 1500)
+    }
+    callMonster() {
+        for (let i = 0; i <= 10; i++) {
+            if (i === 10) {
+                allMonterComProp.arr[i] = new Monster(greenMonBoss, gameProp.screenWidth + 600 * i)
+            } else {
+                allMonterComProp.arr[i] = new Monster(greenMon, gameProp.screenWidth + 700 * i)
+            }
+        }
+    }
+}

@@ -5,6 +5,9 @@ class Hero {
         this.speed = 11
         this.direction = 'right'
         this.attackDamage = 1000
+        this.hpProgress = 0
+        this.hpValue = 10000
+        this.defaultHpValue = 10000
     }
     keyMotion() {
         if (key.keyDown['left']) {
@@ -47,6 +50,12 @@ class Hero {
             width: this.element.offsetWidth,
             height: this.element.offsetHeight
         }
+    }
+    updateHp(monsterDamage) {
+        this.hpValue = Math.max(0, this.hpValue - monsterDamage)
+        this.hpProgress = this.hpValue / this.defaultHpValue * 100
+        const heroHpBox = document.querySelector('.state_box .hp span')
+        heroHpBox.style.width = this.hpProgress + '%'
     }
 }
 
@@ -128,6 +137,7 @@ class Monster {
         this.positionX = positionX
         this.movex = 0
         this.speed = 10
+        this.crashDamage = 100
         this.init()
     }
     init() {
@@ -166,5 +176,13 @@ class Monster {
             this.movex -= this.speed
         }
         this.element.style.transform = `translateX(${this.movex}px)`
+        this.crash()
+    }
+    crash() {
+        let rightDiff = 30
+        let leftDiff = 90
+        if (hero.position().right - rightDiff > this.position().left && hero.position().left + leftDiff < this.position().right) {
+            hero.updateHp(this.crashDamage)
+        }
     }
 }

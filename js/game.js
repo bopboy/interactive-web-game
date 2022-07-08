@@ -59,9 +59,16 @@ const setGameBackground = () => {
 let hero
 const init = () => {
     hero = new Hero('.hero')
-    allMonterComProp.arr[0] = new Monster(pinkMon, gameProp.screenWidth + 700)
-    allMonterComProp.arr[1] = new Monster(yellowMon, gameProp.screenWidth + 1400)
-    allMonterComProp.arr[2] = new Monster(greenMon, gameProp.screenWidth + 2100)
+    // allMonterComProp.arr[0] = new Monster(greenMonBoss, gameProp.screenWidth + 700)
+    // allMonterComProp.arr[1] = new Monster(yellowMonBoss, gameProp.screenWidth + 1400)
+    // allMonterComProp.arr[2] = new Monster(pinkMonBoss, gameProp.screenWidth + 2100)
+    for (let i = 0; i <= 10; i++) {
+        if (i === 10) {
+            allMonterComProp.arr[i] = new Monster(greenMonBoss, gameProp.screenWidth + 600 * i)
+        } else {
+            allMonterComProp.arr[i] = new Monster(greenMon, gameProp.screenWidth + 700 * i)
+        }
+    }
     loadImg()
     windowEvent()
     renderGame()

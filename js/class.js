@@ -117,6 +117,7 @@ class Bullet {
                     if (bulletComProp.arr[i] === this) {
                         bulletComProp.arr.splice(i, 1)
                         this.element.remove()
+                        this.damageView(allMonterComProp.arr[j])
                         allMonterComProp.arr[j].updateHp(j)
                     }
                 }
@@ -130,6 +131,19 @@ class Bullet {
                 }
             }
         }
+    }
+    damageView(monster) {
+        this.parentNode = document.querySelector('.game_app')
+        this.textDamageNode = document.createElement('div')
+        this.textDamageNode.className = 'text_damage'
+        this.textDamage = document.createTextNode(hero.attackDamage)
+        this.textDamageNode.append(this.textDamage)
+        this.parentNode.append(this.textDamageNode)
+        let textPosition = Math.random() * -100
+        let damagex = monster.position().left + textPosition
+        let damagey = monster.position().top
+        this.textDamageNode.style.transform = `translate(${damagex}px, ${-damagey}px)`
+        setTimeout(() => this.textDamageNode.remove(), 500)
     }
 }
 

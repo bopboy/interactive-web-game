@@ -59,8 +59,9 @@ const setGameBackground = () => {
 let hero
 const init = () => {
     hero = new Hero('.hero')
-    allMonterComProp.arr[0] = new Monster(700, 7777)
-    // allMonterComProp.arr[1] = new Monster(1500, 5555)
+    allMonterComProp.arr[0] = new Monster(pinkMon, gameProp.screenWidth + 700)
+    allMonterComProp.arr[1] = new Monster(yellowMon, gameProp.screenWidth + 1400)
+    allMonterComProp.arr[2] = new Monster(greenMon, gameProp.screenWidth + 2100)
     loadImg()
     windowEvent()
     renderGame()

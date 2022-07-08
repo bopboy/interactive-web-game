@@ -164,6 +164,20 @@
     animation: monster_run 0.7s infinite steps(8);
 }
 
+.monster_box.yellow_mon .monster {
+    height: 100%;
+    background-image: url('../lib/images/monster/monster_yellow_run.png');
+    background-size: 2242px 294px;
+    animation: monster_run 0.7s infinite steps(8);
+}
+
+.monster_box.pink_mon .monster {
+    height: 100%;
+    background-image: url('../lib/images/monster/monster_pink_run.png');
+    background-size: 2242px 294px;
+    animation: monster_run 0.7s infinite steps(8);
+}
+
 .monster_box .hp {
     position: absolute;
     left: 0;

@@ -56,6 +56,17 @@ class Hero {
         this.hpProgress = this.hpValue / this.defaultHpValue * 100
         const heroHpBox = document.querySelector('.state_box .hp span')
         heroHpBox.style.width = this.hpProgress + '%'
+        this.crash()
+        if (this.hpValue === 0) {
+            this.dead()
+        }
+    }
+    crash() {
+        this.element.classList.add('crash')
+        setTimeout(() => this.element.classList.remove('crash'), 400)
+    }
+    dead() {
+        this.element.classList.add('dead')
     }
 }
 

@@ -4,10 +4,11 @@ class Hero {
         this.movex = 0
         this.speed = 11
         this.direction = 'right'
-        this.attackDamage = 1000
+        this.attackDamage = 10000
         this.hpProgress = 0
         this.hpValue = 10000
-        this.defaultHpValue = 10000
+        this.defaultHpValue = this.hpValue
+        this.realDamage = 0
     }
     keyMotion() {
         if (key.keyDown['left']) {
@@ -69,6 +70,9 @@ class Hero {
         this.element.classList.add('dead')
         endGame()
     }
+    hitDamage() {
+        this.realDamage = this.attackDamage - Math.round(this.attackDamage * Math.random() * 0.1)
+    }
 }
 
 class Bullet {
@@ -115,6 +119,7 @@ class Bullet {
             if (this.position().left > allMonterComProp.arr[j].position().left && this.position().right < allMonterComProp.arr[j].position().right) {
                 for (let i = 0; i < bulletComProp.arr.length; i++) {
                     if (bulletComProp.arr[i] === this) {
+                        hero.hitDamage()
                         bulletComProp.arr.splice(i, 1)
                         this.element.remove()
                         this.damageView(allMonterComProp.arr[j])
@@ -136,7 +141,7 @@ class Bullet {
         this.parentNode = document.querySelector('.game_app')
         this.textDamageNode = document.createElement('div')
         this.textDamageNode.className = 'text_damage'
-        this.textDamage = document.createTextNode(hero.attackDamage)
+        this.textDamage = document.createTextNode(hero.realDamage)
         this.textDamageNode.append(this.textDamage)
         this.parentNode.append(this.textDamageNode)
         let textPosition = Math.random() * -100
@@ -187,7 +192,7 @@ class Monster {
         allMonterComProp.arr.splice(index, 1)
     }
     updateHp(index) {
-        this.hpValue = Math.max(0, this.hpValue - hero.attackDamage)
+        this.hpValue = Math.max(0, this.hpValue - hero.realDamage)
         this.progress = this.hpValue / this.defaultHpValue * 100
         this.element.children[0].children[0].style.width = this.progress + '%'
 

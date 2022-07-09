@@ -4,7 +4,7 @@ class Hero {
         this.movex = 0
         this.speed = 11
         this.direction = 'right'
-        this.attackDamage = 55510000
+        this.attackDamage = 20000
         this.hpProgress = 0
         this.hpValue = 5510000
         this.defaultHpValue = this.hpValue
@@ -72,6 +72,10 @@ class Hero {
     }
     hitDamage() {
         this.realDamage = this.attackDamage - Math.round(this.attackDamage * Math.random() * 0.1)
+    }
+    heroUpgrade() {
+        this.speed += 1.3
+        this.attackDamage += 15000
     }
 }
 
@@ -244,19 +248,23 @@ class Stage {
     callMonster() {
         for (let i = 0; i <= 10; i++) {
             if (i === 10) {
-                allMonterComProp.arr[i] = new Monster(greenMonBoss, hero.movex + gameProp.screenWidth + 600 * i)
+                allMonterComProp.arr[i] = new Monster(stageInfo.monster[this.level].bossMon, hero.movex + gameProp.screenWidth + 600 * i)
             } else {
-                allMonterComProp.arr[i] = new Monster(greenMon, hero.movex + gameProp.screenWidth + 700 * i)
+                allMonterComProp.arr[i] = new Monster(stageInfo.monster[this.level].defaultMon, hero.movex + gameProp.screenWidth + 700 * i)
             }
         }
     }
     clearCheck() {
-        if (allMonterComProp.arr.length === 0) {
-            console.log(this.level)
+        if (allMonterComProp.arr.length === 0 && this.isStart) {
             this.isStart = false
             this.level++
-            this.stageGuide('CLEAR!')
-            this.stageStart()
+            if (this.level < stageInfo.monster.length) {
+                this.stageGuide('CLEAR!')
+                this.stageStart()
+                hero.heroUpgrade()
+            } else {
+                this.stageGuide('All CLEAR!! WOW')
+            }
         }
     }
 }

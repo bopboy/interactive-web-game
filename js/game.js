@@ -22,7 +22,12 @@ const gameBackground = {
     gameBox: document.querySelector('.game')
 }
 const stageInfo = {
-    stage: []
+    stage: [],
+    monster: [
+        { defaultMon: greenMon, bossMon: greenMonBoss },
+        { defaultMon: yellowMon, bossMon: yellowMonBoss },
+        { defaultMon: pinkMon, bossMon: pinkMonBoss },
+    ]
 }
 const renderGame = () => {
     hero.keyMotion()

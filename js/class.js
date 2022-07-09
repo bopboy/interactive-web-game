@@ -173,6 +173,7 @@ class Monster {
         this.movex = 0
         this.speed = property.speed
         this.crashDamage = property.crashDamage
+        this.score = property.score
         this.init()
     }
     init() {
@@ -194,6 +195,7 @@ class Monster {
         this.element.classList.add('remove')
         setTimeout(() => this.element.remove(), 200)
         allMonterComProp.arr.splice(index, 1)
+        this.setScore()
     }
     updateHp(index) {
         this.hpValue = Math.max(0, this.hpValue - hero.realDamage)
@@ -219,6 +221,10 @@ class Monster {
         if (hero.position().right - rightDiff > this.position().left && hero.position().left + leftDiff < this.position().right) {
             hero.updateHp(this.crashDamage)
         }
+    }
+    setScore() {
+        stageInfo.totalScore += this.score
+        document.querySelector('.score_box').innerText = stageInfo.totalScore
     }
 }
 

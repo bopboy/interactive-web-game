@@ -35,6 +35,7 @@ const stageInfo = {
 const renderGame = () => {
     hero.keyMotion()
     setGameBackground()
+    npcOne.crash()
     bulletComProp.arr.forEach((arr, i) => {
         arr.moveBullet()
     })
@@ -69,9 +70,12 @@ const setGameBackground = () => {
 }
 
 let hero
+let npcOne
+
 const init = () => {
     hero = new Hero('.hero')
     stageInfo.stage = new Stage()
+    npcOne = new Npc()
     loadImg()
     windowEvent()
     renderGame()

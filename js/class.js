@@ -344,3 +344,40 @@ class Stage {
         // }
     }
 }
+
+class Npc {
+    constructor() {
+        this.parentNode = document.querySelector('.game')
+        this.element = document.createElement('div')
+        this.element.className = 'npc_box'
+        this.npcCrash = false
+        this.init()
+    }
+    init() {
+        let npcTalk = ''
+        npcTalk += `
+            <div class="talk_box">
+                <p>큰일이다..<br>사람들이 좀비로 변하고 있어</br><span>대화 Enter</span></p>
+            </div>
+            <div class="npc"></div> 
+        `
+        this.element.innerHTML = npcTalk
+        this.parentNode.append(this.element)
+    }
+    position() {
+        return {
+            left: this.element.getBoundingClientRect().left,
+            right: this.element.getBoundingClientRect().right,
+            top: gameProp.screenHeight - this.element.getBoundingClientRect().top,
+            bottom: gameProp.screenHeight - this.element.getBoundingClientRect().top - this.element.getBoundingClientRect().height
+        }
+    }
+    crash() {
+        if (hero.position().right > this.position().left && hero.position().left < this.position().right) {
+            this.npcCrash = true
+        } else {
+            this.npcCrash = false
+        }
+        console.log(this.npcCrash)
+    }
+}

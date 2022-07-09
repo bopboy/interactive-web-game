@@ -13,6 +13,10 @@ class Hero {
         this.slideTime = 0
         this.slideMaxTime = 30
         this.slideDown = false
+        this.level = 1
+        this.exp = 0
+        this.maxExp = 3000
+        this.expProgress = 0
     }
     keyMotion() {
         if (key.keyDown['left']) {
@@ -98,8 +102,27 @@ class Hero {
         this.realDamage = this.attackDamage - Math.round(this.attackDamage * Math.random() * 0.1)
     }
     heroUpgrade() {
-        this.speed += 1.3
-        this.attackDamage += 15000
+        this.speed += 1.1
+        this.attackDamage += 5000
+    }
+    updateExp(exp) {
+        this.exp += exp
+        this.expProgress = this.exp / this.maxExp * 100
+        document.querySelector('.hero_state .exp span').style.width = this.expProgress + '%'
+        if (this.exp >= this.maxExp) {
+            this.levelUp()
+        }
+    }
+    levelUp() {
+        this.level += 1
+        this.exp = 0
+        this.maxExp = this.maxExp + this.level * 1000
+        document.querySelector('.level_box strong').innerText = this.level
+        const levelGuide = document.querySelector('.hero_box .level_up')
+        levelGuide.classList.add('active')
+        setTimeout(() => levelGuide.classList.remove('active'), 1000)
+        this.updateExp(this.exp)
+        this.heroUpgrade()
     }
 }
 
@@ -198,6 +221,7 @@ class Monster {
         this.speed = property.speed
         this.crashDamage = property.crashDamage
         this.score = property.score
+        this.exp = property.exp
         this.init()
     }
     init() {
@@ -220,6 +244,7 @@ class Monster {
         setTimeout(() => this.element.remove(), 200)
         allMonterComProp.arr.splice(index, 1)
         this.setScore()
+        this.setExp()
     }
     updateHp(index) {
         this.hpValue = Math.max(0, this.hpValue - hero.realDamage)
@@ -249,6 +274,9 @@ class Monster {
     setScore() {
         stageInfo.totalScore += this.score
         document.querySelector('.score_box').innerText = stageInfo.totalScore
+    }
+    setExp() {
+        hero.updateExp(this.exp)
     }
 }
 

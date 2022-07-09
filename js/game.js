@@ -3,7 +3,8 @@ const key = {
     keyValue: {
         37: 'left',
         39: 'right',
-        88: 'attack'
+        88: 'attack',
+        67: 'slide'
     }
 }
 const gameProp = {

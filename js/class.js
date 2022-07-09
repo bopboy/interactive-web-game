@@ -4,11 +4,15 @@ class Hero {
         this.movex = 0
         this.speed = 11
         this.direction = 'right'
-        this.attackDamage = 20000
+        this.attackDamage = 10000
         this.hpProgress = 0
-        this.hpValue = 5510000
+        this.hpValue = 100000
         this.defaultHpValue = this.hpValue
         this.realDamage = 0
+        this.slideSpeed = 14
+        this.slideTime = 0
+        this.slideMaxTime = 30
+        this.slideDown = false
     }
     keyMotion() {
         if (key.keyDown['left']) {
@@ -35,6 +39,26 @@ class Hero {
         if (!key.keyDown['attack']) {
             this.element.classList.remove('attack')
             bulletComProp.launch = false
+        }
+        if (key.keyDown['slide']) {
+            if (!this.slideDown) {
+                this.element.classList.add('slide')
+                if (this.direction === 'right') {
+                    this.movex = this.movex + this.slideSpeed
+                } else {
+                    this.movex = this.movex - this.slideSpeed
+                }
+                if (this.slideTime > this.slideMaxTime) {
+                    this.element.classList.remove('slide')
+                    this.slideDown = true
+                }
+                this.slideTime += 1
+            }
+        }
+        if (!key.keyDown['slide']) {
+            this.element.classList.remove('slide')
+            this.slideDown = false
+            this.slideTime = 0
         }
         this.element.parentNode.style.transform = `translateX(${this.movex}px)`
     }

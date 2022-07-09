@@ -80,15 +80,22 @@ class Hero {
             height: this.element.offsetHeight
         }
     }
-    updateHp(monsterDamage) {
+    minusHp(monsterDamage) {
         this.hpValue = Math.max(0, this.hpValue - monsterDamage)
-        this.hpProgress = this.hpValue / this.defaultHpValue * 100
-        const heroHpBox = document.querySelector('.state_box .hp span')
-        heroHpBox.style.width = this.hpProgress + '%'
         this.crash()
         if (this.hpValue === 0) {
             this.dead()
         }
+        this.renderHp()
+    }
+    plusHp(hp) {
+        this.hpValue = hp
+        this.renderHp()
+    }
+    renderHp() {
+        this.hpProgress = this.hpValue / this.defaultHpValue * 100
+        const heroHpBox = document.querySelector('.state_box .hp span')
+        heroHpBox.style.width = this.hpProgress + '%'
     }
     crash() {
         this.element.classList.add('crash')
@@ -123,6 +130,7 @@ class Hero {
         setTimeout(() => levelGuide.classList.remove('active'), 1000)
         this.updateExp(this.exp)
         this.heroUpgrade()
+        this.plusHp(this.defaultHpValue)
     }
 }
 
@@ -268,7 +276,7 @@ class Monster {
         let rightDiff = 30
         let leftDiff = 90
         if (hero.position().right - rightDiff > this.position().left && hero.position().left + leftDiff < this.position().right) {
-            hero.updateHp(this.crashDamage)
+            hero.minusHp(this.crashDamage)
         }
     }
     setScore() {

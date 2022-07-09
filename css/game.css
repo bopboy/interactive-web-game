@@ -445,3 +445,51 @@
     color: #fff;
     font-size: 2rem;
 }
+
+@keyframes npc_idle {
+    from {
+        background-position: 0px;
+    }
+
+    to {
+        background-position: -1498px;
+    }
+}
+
+.npc_box {
+    position: absolute;
+    left: 400px;
+    bottom: 0;
+    z-index: 90;
+    width: 150px;
+    height: 182px;
+}
+
+.npc_box .npc {
+    height: 100%;
+    background-image: url('../lib/images/robot_idle.png');
+    background-size: 1498px 182px;
+    animation: npc_idle .7s infinite steps(10);
+}
+
+.npc_box .talk_box {
+    position: absolute;
+    left: 60px;
+    bottom: 105%;
+    width: 150px;
+    color: #222;
+    background-color: #f1f1f1;
+    border: 2px solid #555;
+    border-radius: 20px;
+}
+
+.npc_box p {
+    padding: 10px;
+}
+
+.npc_box span {
+    display: block;
+    color: #bf0000;
+    text-align: right;
+    font-size: 14px;
+}

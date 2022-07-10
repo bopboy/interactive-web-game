@@ -80,7 +80,7 @@ let npcOne
 const init = () => {
     hero = new Hero('.hero')
     stageInfo.stage = new Stage()
-    npcOne = new Npc()
+    npcOne = new Npc(levelQuest)
     loadImg()
     windowEvent()
     renderGame()

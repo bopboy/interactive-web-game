@@ -30,8 +30,9 @@ const stageInfo = {
         { defaultMon: greenMon, bossMon: greenMonBoss },
         { defaultMon: yellowMon, bossMon: yellowMonBoss },
         { defaultMon: pinkMon, bossMon: pinkMonBoss },
+        { defaultMon: pinkMon, bossMon: zombieKing },
     ],
-    callPosition: [1000, 5000, 9000]
+    callPosition: [1000, 5000, 9000, 12000]
 }
 const renderGame = () => {
     hero.keyMotion()

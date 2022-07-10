@@ -108,9 +108,10 @@ class Hero {
     hitDamage() {
         this.realDamage = this.attackDamage - Math.round(this.attackDamage * Math.random() * 0.1)
     }
-    heroUpgrade() {
+    heroUpgrade(upDamage) {
         this.speed += 1.1
-        this.attackDamage += 5000
+        let damage = upDamage ?? 5000
+        this.attackDamage += damage
     }
     updateExp(exp) {
         this.exp += exp
@@ -353,6 +354,8 @@ class Npc {
         this.npcCrash = false
         this.talkOn = false
         this.modal = document.querySelector('.quest_modal')
+        this.questStart = false
+        this.questEnd = false
         this.init()
     }
     init() {
@@ -392,14 +395,31 @@ class Npc {
         }
     }
     quest() {
-        let text = ''
-        text += `
+        const message = {
+            start: '마을에 몬스터가 출몰해 주민들을 좀비로 만들고 있다. 몬스터를 사냥해서 주민을 구하고 <span>레벨을 5 이상</span>으로 만들어 힘을 증명한다면 좀비왕을 물리칠 수 있도록 내 힘을 빌려줄께!',
+            ing: '이런 아직 레벨을 달성하지 못했네',
+            suc: '레벨을 달성했네. 힘을 빌려줄께',
+            end: '고맙다. 행운을 빌어!'
+        }
+        let messageState = ''
+        if (!this.questStart) {
+            messageState = message.start
+            this.questStart = true
+        } else if (this.questStart && !this.questEnd && hero.level <= 5) {
+            messageState = message.ing
+        } else if (this.questStart && !this.questEnd && hero.level >= 5) {
+            messageState = message.suc
+            this.questEnd = true
+            hero.heroUpgrade(50000)
+        } else if (this.questStart && this.questEnd) {
+            messageState = message.end
+        }
+        let text = `
             <figure class="npc_img">
                 <img src="./lib/images/npc.png">
             </figure>
             <p>
-                마을에 몬스터가 출몰해 주민들을 좀비로 만들고 있다. 몬스터를 사냥해서 주민을 구하고
-                <span>레벨을 5 이상</span>으로 만들어 힘을 증명한다면 좀비왕을 물리칠 수 있도록 내 힘을 빌려줄께!
+                ${messageState}
             </p>
         `
         const modalInner = document.querySelector('.quest_modal .inner_box .quest_talk')

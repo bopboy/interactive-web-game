@@ -4,7 +4,8 @@ const key = {
         37: 'left',
         39: 'right',
         88: 'attack',
-        67: 'slide'
+        67: 'slide',
+        13: 'enter'
     }
 }
 const gameProp = {
@@ -36,6 +37,7 @@ const renderGame = () => {
     hero.keyMotion()
     setGameBackground()
     npcOne.crash()
+
     bulletComProp.arr.forEach((arr, i) => {
         arr.moveBullet()
     })
@@ -55,6 +57,9 @@ const endGame = () => {
 const windowEvent = () => {
     window.addEventListener('keydown', e => {
         if (!gameProp.gameOver) key.keyDown[key.keyValue[e.which]] = true
+        if (key.keyDown['enter']) {
+            npcOne.talk()
+        }
     })
     window.addEventListener('keyup', e => {
         key.keyDown[key.keyValue[e.which]] = false
@@ -80,11 +85,11 @@ const init = () => {
     windowEvent()
     renderGame()
 }
-window.addEventListener('keydown', e => {
-    if (e.which === 13) init()
-})
+// window.addEventListener('keydown', e => {
+//     if (e.which === ) init()
+// })
 window.onload = () => {
-    // init()
+    init()
 }
 
 const loadImg = () => {

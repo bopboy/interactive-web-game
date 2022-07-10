@@ -493,3 +493,39 @@
     text-align: right;
     font-size: 14px;
 }
+
+.quest_modal {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 210;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.quest_modal.active {
+    display: block;
+}
+
+.quest_modal .inner_box {
+    position: absolute;
+    left: 25%;
+    top: 50%;
+    z-index: 10;
+    width: 700px;
+    transform: translate((-50%, -50%));
+    padding: 40px 10px;
+    box-sizing: border-box;
+    background-color: #fff;
+    border: 10px solid #8793eb;
+    border-radius: 10px;
+}
+
+.quest_modal .inner_box .close {
+    position: absolute;
+    right: 10px;
+    bottom: 5px;
+    color: #bf0000;
+}

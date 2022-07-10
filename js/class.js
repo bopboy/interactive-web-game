@@ -351,6 +351,8 @@ class Npc {
         this.element = document.createElement('div')
         this.element.className = 'npc_box'
         this.npcCrash = false
+        this.talkOn = false
+        this.modal = document.querySelector('.quest_modal')
         this.init()
     }
     init() {
@@ -378,6 +380,14 @@ class Npc {
         } else {
             this.npcCrash = false
         }
-        console.log(this.npcCrash)
+    }
+    talk() {
+        if (!this.talkOn && this.npcCrash) {
+            this.talkOn = true
+            this.modal.classList.add('active')
+        } else if (this.talkOn) {
+            this.talkOn = false
+            this.modal.classList.remove('active')
+        }
     }
 }

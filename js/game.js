@@ -37,6 +37,7 @@ const renderGame = () => {
     hero.keyMotion()
     setGameBackground()
     npcOne.crash()
+    npcTwo.crash()
 
     bulletComProp.arr.forEach((arr, i) => {
         arr.moveBullet()
@@ -59,6 +60,7 @@ const windowEvent = () => {
         if (!gameProp.gameOver) key.keyDown[key.keyValue[e.which]] = true
         if (key.keyDown['enter']) {
             npcOne.talk()
+            npcTwo.talk()
         }
     })
     window.addEventListener('keyup', e => {
@@ -76,11 +78,13 @@ const setGameBackground = () => {
 
 let hero
 let npcOne
+let npcTwo
 
 const init = () => {
     hero = new Hero('.hero')
     stageInfo.stage = new Stage()
     npcOne = new Npc(levelQuest)
+    npcTwo = new Npc(levelQuestTwo)
     loadImg()
     windowEvent()
     renderGame()
